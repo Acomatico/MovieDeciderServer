@@ -3,11 +3,11 @@
 const userModel = require('../models/user');
 
 async function create(user) {
-    userModel.create(user);
+    await userModel.create(user);
 }
 
 async function findOneBy(filters) {
-    userModel.findOne(filters)
+    return await userModel.findOne(filters)
 }
 
 module.exports = { create, findOneBy }

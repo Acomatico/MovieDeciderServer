@@ -16,7 +16,8 @@ async function registerUser(req,res,next) {
         })
     }
 
-    if (userRepository.findOneBy({email: data.email})) {
+    const user = await userRepository.findOneBy({email: data.email});
+    if (user) {
         return res.status(400).send({
             error: 'badRequest',
             message: 'This Email already exists'
