@@ -36,7 +36,8 @@ async function createRoom(req,res,next) {
         code: inputData.code,
         movies: movies,
         createdAt: now,
-        updatedAt: now
+        updatedAt: now,
+        active: false
     };
 
     await roomRepository.create(newRoom);

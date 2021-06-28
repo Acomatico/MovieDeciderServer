@@ -17,6 +17,9 @@ const roomSchema = new Schema({
         type: String,
         unique: true
     },
+    active: {
+        type: Boolean
+    },
     movies: [movieSchema],
     createdAt: {
         type: Date
