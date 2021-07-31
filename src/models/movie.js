@@ -16,7 +16,7 @@ const movieSchema = new Schema({
         type: String
     },
     genre: {
-        type: string
+        type: String
     },
     createdAt: {
         type: Date
@@ -26,6 +26,6 @@ const movieSchema = new Schema({
     }
 });
 
-const Movie = mongoose.model('Movie', userSchema);
+const Movie = mongoose.model('Movie', movieSchema);
 
 module.exports = {movieSchema, Movie};

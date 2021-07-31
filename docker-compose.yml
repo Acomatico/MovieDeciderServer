@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    container_name: node
+    command: npm run dev
+    volumes:
+      - .:/usr/app/
+      - /usr/app/node_modules
+    ports:
+      - "3000:3000"
+  
+  mongodb_container:
+    container_name: mongo_db
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data_container:/data/db
+
+volumes:
+  mongodb_data_container:

@@ -22,7 +22,7 @@ async function init() {
         process.exit(1);
     }
 
-    const port = process.env.port || 5000;
+    const port = process.env.PORT || 8080;
     app.listen(port, () => {
         console.log(`server running on port ${port}`);
     })
