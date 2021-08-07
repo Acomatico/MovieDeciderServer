@@ -23,6 +23,10 @@ const movieSchema = new Schema({
     },
     updatedAt: {
         type: Date
+    },
+    rating: {
+        type: Number,
+        default: 0
     }
 });
 

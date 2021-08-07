@@ -18,7 +18,8 @@ async function createRoom(req,res,next) {
 
     const uuid = uuidv4();
     const now = new Date();
-    const movies = inputData.map(movie => {
+    const { movies } = inputData;
+    const moviesData = movies.map(movie => {
         const movieUuid = uuidv4();
         return {
             uuid: movieUuid,
@@ -34,7 +35,7 @@ async function createRoom(req,res,next) {
         uuid: uuid,
         creator: user.uuid,
         code: inputData.code,
-        movies: movies,
+        movies: moviesData,
         createdAt: now,
         updatedAt: now,
         active: false
