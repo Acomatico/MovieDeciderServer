@@ -16,7 +16,6 @@ app.use(bodyParser.json());
 const wsServer = new ws.Server({ noServer: true });
 wsServer.on('joinRoom', (socket, request) => {
     const roomCode = request.url.split('/')[2];
-    
     joinRoom(roomCode, socket);
 
 })

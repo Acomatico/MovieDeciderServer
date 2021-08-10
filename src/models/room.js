@@ -21,6 +21,10 @@ const roomSchema = new Schema({
         type: Boolean
     },
     movies: [movieSchema],
+    voters: {
+        type: Array,
+        items: String
+    },
     createdAt: {
         type: Date
     },
