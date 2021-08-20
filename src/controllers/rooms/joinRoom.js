@@ -8,6 +8,14 @@ async function joinRoom(roomCode, socket) {
     let i = 0;
     const room = await roomRepository.findOneByCode(roomCode);
 
+    if (!room) {
+        socket.send(JSON.stringify({
+            error: 'Room not found'
+        }));
+        socket.close();
+        return;
+    }
+
     let user = null;
 
     socket.send(JSON.stringify({
