@@ -36,33 +36,40 @@ async function joinRoom(roomCode, socket) {
                 return;
             }
 
-            if (room.voters.filter(voterId => voterId === user.Id) > 0) {
-                console.log('closing shit');
-                socket.close();
-            }
-        });
+            const voterExist = room.voters.filter(voterId => { 
+                return voterId === user.uuid;
+            });
 
-    
-        if ("nextMovie" === command) {
-            if (room.movies.length > i) {
-
-                if (approved) {
-                    room.movies[i].rating++;
-                }
-
-                i++;
+            if (voterExist) {
                 socket.send(JSON.stringify({
-                    isLast: i + 1 === room.movies.length ? true : false,
-                    movie: room.movies[i]
+                    error: 'User has already voted'
                 }));
-            }
-        }
 
+                console.log('closing socket');
+                socket.close();
+                return;
+            }
+
+            if ("nextMovie" === command) {
+                if (room.movies.length > i) {
+    
+                    if (approved) {
+                        room.movies[i].rating++;
+                    }
+    
+                    i++;
+                    socket.send(JSON.stringify({
+                        isLast: i + 1 === room.movies.length ? true : false,
+                        movie: room.movies[i]
+                    }));
+                }
+            }
+        })
     });
 
     socket.on('close', () => {
         if (null !== user) {
-            room.voters.push(user.id)
+            room.voters.push(user.uuid)
         }
 
         roomRepository.updateRoom(room);
